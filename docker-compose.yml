@@ -10,12 +10,14 @@ services:
       - 8080:8080
     # env_file: 
     #   - .env
-    environment: 
-      - NEO4J_DATABASE:neo4j
-      - NEO4J_VERSION:4
-      - NEO4J_URL:bolt://neo4j:7687
-      - NEO4J_USER:test
-      - NEO4J_PASSWORD:example
+    environment:
+      - GO111MODULE=on
+      - GO_ENV=local
+      - NEO4J_DATABASE=neo4j
+      - NEO4J_VERSION=4
+      - NEO4J_URL=bolt://neo4j:7687
+      - NEO4J_USER=test
+      - NEO4J_PASSWORD=example
   neo4j:
     image: neo4j
     restart: always
