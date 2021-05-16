@@ -234,9 +234,10 @@ func graphHandler(driver neo4j.Driver, database string) func(http.ResponseWriter
 }
 
 func main() {
-	err := godotenv.Load(fmt.Sprintf("../%s.env", os.Getenv("GO_ENV")))
+	err := godotenv.Load(fmt.Sprintf("./env/%s.env", os.Getenv("GO_ENV")))
     if err != nil {
-        log.Println("error load env")
+        log.Println("error load env. please check env file path")
+		log.Println(os.Getenv("GO_ENV"))
     }
 	configuration := parseConfiguration()
 	driver, err := configuration.newDriver()
@@ -272,14 +273,14 @@ func parseLimit(req *http.Request) int {
 }
 
 func parseConfiguration() *Neo4jConfiguration {
-	database := lookupEnvOrGetDefault("NEO4J_DATABASE", "neo4j")
+	database := lookupEnvOrGetDefault("NEO4J_DATABASE", "")
 	if !strings.HasPrefix(lookupEnvOrGetDefault("NEO4J_VERSION", ""), "4") {
 		database = ""
 	}
 	return &Neo4jConfiguration{
-		Url:      lookupEnvOrGetDefault("NEO4J_URI", "bolt://neo4j:7687"),
-		Username: lookupEnvOrGetDefault("NEO4J_USER", "test"),
-		Password: lookupEnvOrGetDefault("NEO4J_PASSWORD", "example"),
+		Url:      lookupEnvOrGetDefault("NEO4J_URI", ""),
+		Username: lookupEnvOrGetDefault("NEO4J_USER", ""),
+		Password: lookupEnvOrGetDefault("NEO4J_PASSWORD", ""),
 		Database: database,
 	}
 }
