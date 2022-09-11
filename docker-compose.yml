@@ -22,3 +22,4 @@ services:
       - 57687:7687
     volumes: 
       - ./volumes/neo4j/data:/data
+      - ./import:/var/lib/neo4j/import

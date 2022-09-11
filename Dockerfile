@@ -9,4 +9,4 @@ WORKDIR /go/src/app
 # ホストのファイルをコンテナの作業ディレクトリに移行
 ADD . /go/src/app
 
-ENTRYPOINT [ "go", "run", "server.go" ]
+ENTRYPOINT [ "/bin/sh", "-c", "go run bulkinsert.go && go run server.go" ]
